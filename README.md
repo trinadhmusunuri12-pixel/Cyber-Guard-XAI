@@ -386,14 +386,6 @@ Fonts loaded via Google Fonts: `Space Mono`, `DM Mono`, `Syne`
 
 Central Michigan University — CPS Research Project, Spring 2026  
 Advisor: **Professor Qi Liao**
-
----
-
-## 📄 License
-
-This project is intended for **academic and research purposes only**.  
-Please contact the authors before reusing any part of this codebase.
-
 ---
 
 ## 🔗 Links
