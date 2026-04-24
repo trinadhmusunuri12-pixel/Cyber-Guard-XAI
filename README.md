@@ -329,9 +329,6 @@ Fonts loaded via Google Fonts: `Space Mono`, `DM Mono`, `Syne`
 **`model.pkl` not found**
 > Run `python3 train.py` (Linux) or `python train.py` (Windows) inside the `backend/` folder with the venv activated and `Phishing_Email.csv` present.
 
-**DistilBERT not loading / `/suggest` returns 503**
-> The first run downloads ~250MB of model weights. Ensure you have internet access and at least 1GB of free RAM. The main `/analyze` classifier still works without it — only evasion suggestions will be unavailable.
-
 **PowerShell execution policy error (Windows)**
 > Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
