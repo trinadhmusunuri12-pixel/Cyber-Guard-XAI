@@ -45,26 +45,6 @@ const EXAMPLES = {
       label: "HR Payroll Update",
       preview: "Urgent: Update your direct deposit information...",
       text: `Subject: URGENT: Direct Deposit Information Required\n\nHello,\n\nOur Human Resources payroll system is undergoing a mandatory update. Your current direct deposit details have failed validation for the upcoming pay period.\n\nTo ensure your paycheck is processed on time, you must update your banking information immediately via the secure employee portal below:\n\nhttp://hr-payroll-update-portal-employee.com/login\n\nPlease have your routing number, account number, and SSN ready. If you do not update this by 5:00 PM today, your payment will be delayed by up to 30 days.\n\nHR Department`,
-    },
-    {
-      label: "Package Delivery Failure",
-      preview: "FedEx: Your package could not be delivered...",
-      text: `Subject: FedEx Delivery Failure - Action Required\n\nDear Customer,\n\nYour package (Tracking #93847192837) could not be delivered today due to an unpaid customs fee of $2.99.\n\nYour package will be returned to the sender if this fee is not paid immediately. Please click the link below to submit your payment details and schedule a new delivery time:\n\nhttp://fedex-tracking-redelivery-fee.com/pay\n\nDo not reply to this automated message.\n\nFedEx Delivery Team`,
-    },
-    {
-      label: "Tax Refund Scam",
-      preview: "IRS: You are eligible for a $1,200 tax refund...",
-      text: `Subject: IRS Notification: Eligible Tax Refund\n\nDear Taxpayer,\n\nAfter a recalculation of your fiscal records, we have determined that you are eligible to receive a tax refund of $1,200.00.\n\nTo process your refund immediately, you must verify your identity and submit your bank details on our secure server:\n\nhttp://irs-gov-refund-claim-portal.net/verify\n\nYou must claim this refund within 48 hours or the funds will be permanently forfeited to the state.\n\nInternal Revenue Service`,
-    },
-    {
-      label: "Crypto Wallet Alert",
-      preview: "MetaMask: Your wallet will be restricted...",
-      text: `Subject: Final Warning: KYC Verification Required\n\nDear MetaMask User,\n\nDue to new regulatory compliance laws, all unverified wallets will be permanently restricted starting at midnight tonight.\n\nTo prevent the loss of your crypto assets, you must verify your wallet immediately. Click the secure link below and enter your 12-word seed phrase to confirm ownership of your assets:\n\nhttp://metamask-secure-wallet-validation.com/kyc\n\nIf you do not complete this process, your funds will be frozen indefinitely.\n\nMetaMask Support`,
-    },
-    {
-      label: "Streaming Payment Declined",
-      preview: "Netflix: Your last payment was declined...",
-      text: `Subject: Payment Declined - Update Your Billing Details\n\nHi there,\n\nWe were unable to process the billing for your next billing cycle. Your Netflix subscription has been temporarily suspended.\n\nTo restore your streaming access immediately, please update your payment details by clicking the link below:\n\nhttp://netflix-billing-update-secure.com/payment\n\nIf your account is not updated within 24 hours, your profile and viewing history will be permanently deleted.\n\nThe Netflix Team`
     }
   ],
   legitimate: [
@@ -107,26 +87,6 @@ const EXAMPLES = {
       label: "GitHub Action Failure",
       preview: "Run failed: build and test on main branch...",
       text: `Subject: [GitHub] Run failed: build and test on main branch\n\nRun failed for build and test on main\n\nRepository: trinadh/covert-channel-npu\nWorkflow: Node.js CI\nDuration: 2 minutes and 14 seconds\n\nThe job 'build' failed at step 'Run npm test'. Please check the workflow logs for detailed error output regarding the MERN stack backend integration tests.\n\nYou can view the full run details here:\nhttps://github.com/trinadh/covert-channel-npu/actions/runs/98234\n\nGitHub Actions`,
-    },
-    {
-      label: "Library Due Date Reminder",
-      preview: "Your checked-out items are due in 3 days...",
-      text: `Subject: Courtesy Notice: Library Items Due Soon\n\nDear Trinadh,\n\nThis is an automated courtesy reminder from the CMU Library. The following items checked out to your account are due in 3 days:\n\nTitle: "Hardware Security: Design, Threats, and Safeguards"\nBarcode: 39182309182\nDue Date: April 27, 2026\n\nIf you need more time, you can renew these items online by logging into your library account. Items that are requested by another patron cannot be renewed.\n\nCMU Library Services`,
-    },
-    {
-      label: "Doctor Appointment Confirmation",
-      preview: "Appointment Reminder: Dr. Smith on May 2nd...",
-      text: `Subject: Appointment Reminder - Mount Pleasant Clinic\n\nHello Trinadh,\n\nThis is a reminder for your upcoming appointment at the Mount Pleasant Health Clinic.\n\nProvider: Dr. Sarah Smith\nDate: Thursday, May 2, 2026\nTime: 10:30 AM\n\nPlease remember to arrive 15 minutes early to complete any necessary paperwork. If you need to cancel or reschedule, please call our office at least 24 hours in advance to avoid a cancellation fee.\n\nReply 'Y' to confirm or 'N' to cancel.\n\nThank you,\nMount Pleasant Health Clinic`,
-    },
-    {
-      label: "Colleague Question",
-      preview: "Hey, do you have the slides from yesterday's...",
-      text: `Subject: Quick question about the React frontend\n\nHey Trinadh,\n\nHope your week is going well. I'm looking at the React components we discussed yesterday for the Phishing XAI interface.\n\nDid you end up pushing the updated CSS for the Interactive Editor? I'm trying to pull the latest changes but I'm getting a merge conflict in the Scanner.jsx file. Let me know when you have a minute to look at it together.\n\nNo rush, whenever you're free.\n\nThanks,\nBuphesh`,
-    },
-    {
-      label: "Calendar Invite",
-      preview: "Invitation: Weekly Sync @ Wed Apr 29, 2026...",
-      text: `Subject: Invitation: GRA Research Sync @ Wed Apr 29, 2026 10am - 11am\n\nYou have been invited to the following event.\n\nGRA Research Sync\nWhen: Wednesday, Apr 29, 2026 10:00 AM – 11:00 AM Eastern Time\nWhere: Engineering Building, Room 402\n\nAgenda:\n- Review AMD Kraken XDNA architecture documentation.\n- Discuss MLIR toolchain progress.\n- Next steps for NPU power measurement tools.\n\nPlease respond to this calendar invite to confirm your attendance.\n\nOrganizer: Professor Liang`
     }
   ],
 };
@@ -136,7 +96,6 @@ function getPlainText(el) {
   let t = "";
   function walk(n) {
     if (n.nodeType === Node.TEXT_NODE) { t += n.textContent; return; }
-    if (n.nodeName === "BR") { t += "\n"; return; }
     for (const c of n.childNodes) walk(c);
     if (["DIV","P"].includes(n.nodeName) && n !== el) t += "\n";
   }
@@ -218,15 +177,7 @@ function getRiskLevel(pct) {
 
 // ── Examples Panel ────────────────────────────────────────────────────────────
 function ExamplesPanel({ onUse, onClose }) {
-  const [tab, setTab]       = useState("phishing");
-  const [copied, setCopied] = useState(null);
-
-  const handleCopy = (text, idx) => {
-    navigator.clipboard.writeText(text).then(() => {
-      setCopied(`${tab}-${idx}`);
-      setTimeout(() => setCopied(null), 2000);
-    });
-  };
+  const [tab, setTab] = useState("phishing");
 
   const handleUse = (text) => {
     onUse(text);
@@ -283,7 +234,7 @@ function ExamplesPanel({ onUse, onClose }) {
 }
 
 // ── main component ────────────────────────────────────────────────────────────
-export default function Scanner({ onScanComplete }) {
+export default function Scanner({ onScanComplete, loadedEmail, clearLoadedEmail }) {
   const [emailText, setEmailText] = useState("");
   const [loading,   setLoading]   = useState(false);
   const [result,    setResult]    = useState(null);
@@ -293,17 +244,47 @@ export default function Scanner({ onScanComplete }) {
   const [dirty,     setDirty]     = useState(false);
   const [showEx,    setShowEx]    = useState(false);
 
-  // ── Evasion Guide state ────────────────────────────────────────────────
+  // 🌟 NEW: Track the active session ID so we can update history instead of duplicating
+  const [currentScanId,  setCurrentScanId]  = useState(null);
+
   const [evasions,       setEvasions]       = useState(null);
   const [evasionLoading, setEvasionLoading] = useState(false);
   const [swapped,        setSwapped]        = useState({});
   const [allShownWords,  setAllShownWords]  = useState([]); 
   const [safeDisclaimer, setSafeDisclaimer] = useState(false);
   const [dismissedDisclaimer, setDismissedDisclaimer] = useState(false);
+  const [showMoreInfo,   setShowMoreInfo]   = useState(false);
 
   const editorRef  = useRef(null);
   const composing  = useRef(false);
   const tooltipRef = useRef(null);
+
+  // 🌟 Trigger load when user selects an item from History
+  useEffect(() => {
+    if (loadedEmail) {
+      setCurrentScanId(loadedEmail.id); // Resume the existing session ID!
+      
+      // Reset local state cleanly
+      setResult(null);
+      setLimeMap(null);
+      setDirty(false);
+      setError("");
+      setEvasions(null);
+      setSwapped({});
+      setAllShownWords([]);
+      setSafeDisclaimer(false);
+      setDismissedDisclaimer(false);
+      setShowMoreInfo(false);
+      setEmailText(loadedEmail.text);
+      if (editorRef.current) {
+        editorRef.current.innerHTML = buildHTML(loadedEmail.text, null);
+      }
+      
+      // Instantly analyze to populate the visuals
+      analyze(loadedEmail.text, loadedEmail.id);
+      clearLoadedEmail();
+    }
+  }, [loadedEmail]);
 
   // ── handle typing ──────────────────────────────────────────────────────
   const handleInput = useCallback(() => {
@@ -326,7 +307,6 @@ export default function Scanner({ onScanComplete }) {
     document.execCommand("insertText", false, text);
   }, []);
 
-  // ── tooltip on hover ───────────────────────────────────────────────────
   const handleMouseMove = useCallback((e) => {
     const span = e.target.closest(".tok");
     if (!span) { setTooltip(null); return; }
@@ -346,10 +326,17 @@ export default function Scanner({ onScanComplete }) {
   const handleMouseLeave = useCallback(() => setTooltip(null), []);
 
   const loadExample = useCallback((text) => {
+    setCurrentScanId(null); // 🌟 Loading a new example resets the session
     setResult(null);
     setLimeMap(null);
     setDirty(false);
     setError("");
+    setEvasions(null);
+    setSwapped({});
+    setAllShownWords([]);
+    setSafeDisclaimer(false);
+    setDismissedDisclaimer(false);
+    setShowMoreInfo(false);
     setEmailText(text);
     const el = editorRef.current;
     if (el) {
@@ -358,12 +345,17 @@ export default function Scanner({ onScanComplete }) {
   }, []);
 
   // ── API call ───────────────────────────────────────────────────────────
-  const analyze = useCallback(async (overrideText) => {
+  const analyze = useCallback(async (overrideText, overrideId) => {
     const body = (overrideText ?? emailText).trim();
     if (!body) return;
     setLoading(true);
     setError("");
     setDirty(false);
+
+    // 🌟 Identify the session
+    const scanIdToUse = overrideId || currentScanId || Date.now();
+    if (!currentScanId && !overrideId) setCurrentScanId(scanIdToUse);
+
     try {
       const res = await fetch(`${API}/analyze`, {
         method: "POST",
@@ -376,7 +368,10 @@ export default function Scanner({ onScanComplete }) {
       }
       const data = await res.json();
       setResult(data);
-      onScanComplete();
+      
+      // 🌟 Pass the scanIdToUse to History so it updates instead of duplicates
+      if(onScanComplete) onScanComplete(data, body, scanIdToUse);
+      
       const map = {};
       for (const { word, score } of data.lime_words) {
         map[word.toLowerCase()] = score;
@@ -386,7 +381,7 @@ export default function Scanner({ onScanComplete }) {
       setEmailText(displayText);
       const el = editorRef.current;
       if (el) el.innerHTML = buildHTML(displayText, map);
-      
+
       // Auto-fetch evasions if phishing
       if (data.prediction === 1) {
         fetchEvasions(data, displayText, [], false);
@@ -405,9 +400,10 @@ export default function Scanner({ onScanComplete }) {
     } finally {
       setLoading(false);
     }
-  }, [emailText, onScanComplete]);
+  }, [emailText, onScanComplete, result, currentScanId]);
 
   const reset = useCallback(() => {
+    setCurrentScanId(null); // 🌟 Clicking New Scan starts a new session
     setResult(null);
     setLimeMap(null);
     setEmailText("");
@@ -419,9 +415,9 @@ export default function Scanner({ onScanComplete }) {
     setAllShownWords([]);
     setSafeDisclaimer(false);
     setDismissedDisclaimer(false);
+    setShowMoreInfo(false);
     if (editorRef.current) editorRef.current.innerHTML = "";
   }, []);
-
 
   // ── fetch evasion suggestions ──────────────────────────────────────────
   const fetchEvasions = useCallback(async (currentResult, currentEmailText, skipWords, append) => {
@@ -494,12 +490,15 @@ export default function Scanner({ onScanComplete }) {
     if (el) el.innerHTML = buildHTML(text, limeMap);
   }, [evasions, swapped, emailText, limeMap]);
 
+  // Calculations
   const hasResult = !!result;
   const isPhish   = result?.prediction === 1;
   const riskPct   = result ? Math.round(result.risk_score * 100) : 0;
   const rl        = getRiskLevel(riskPct);
-  
   const matchedKw = !hasResult ? PHISHING_KEYWORDS.filter(kw => new RegExp(`\\b${kw}\\b`, "i").test(emailText)) : [];
+
+  const topPhish = result?.lime_words ? [...result.lime_words].filter(w => w.score > 0).sort((a,b) => b.score - a.score).slice(0, 10) : [];
+  const topSafe = result?.lime_words ? [...result.lime_words].filter(w => w.score < 0).sort((a,b) => a.score - b.score).slice(0, 10) : [];
 
   function tooltipColor(score) {
     if (score === null) return "#94a3b8";
@@ -529,47 +528,27 @@ export default function Scanner({ onScanComplete }) {
         />
       )}
 
-      {/* ── Hero (only before analysis) ── */}
-      {!hasResult && (
-        <div className="scanner-hero">
-          <div className="hero-top-row">
-            <div className="hero-tag">Explainable AI · Phishing Detection</div>
-            <button className="examples-btn" onClick={() => setShowEx(true)}>
-              <span className="examples-btn-icon">⬡</span>
-              View Examples
-            </button>
-          </div>
-          <h1 className="hero-title">
-            Analyze any email<br />
-            <span className="hero-accent">for threats.</span>
-          </h1>
-          <p className="hero-sub">
-            Paste email text below. Suspicious words light up instantly.
-          </p>
+      {/* ── Hero (always visible above editor) ── */}
+      <div className="scanner-hero" style={{ marginBottom: hasResult ? 24 : 40 }}>
+        <div className="hero-top-row">
+          <div className="hero-tag">Explainable AI · Phishing Detection</div>
+          <button className="examples-btn" onClick={() => setShowEx(true)}>
+            <span className="examples-btn-icon">⬡</span>
+            View Examples
+          </button>
         </div>
-      )}
-
-      {/* 🌟 PROFESSOR UPDATE: NOOB-FRIENDLY VERDICT BANNER 🌟 */}
-      {hasResult && (
-        <div className={`verdict-banner ${isPhish ? "verdict-phish" : "verdict-safe"}`}>
-          <div className="verdict-left" style={{ alignItems: 'center' }}>
-            <div className={`verdict-icon-circle ${isPhish ? "circle-phish" : "circle-safe"}`} style={{ width: '60px', height: '60px', fontSize: '32px' }}>
-              {isPhish ? "!" : "✓"}
-            </div>
-            <div>
-              <div className="verdict-label" style={{ fontSize: '28px', margin: 0 }}>
-                {isPhish ? "Phishing Mail" : "Legitimate Email"}
-              </div>
-            </div>
-          </div>
-          <div style={{ display: "flex", gap: 8 }}>
-            <button className="examples-btn-sm" onClick={() => setShowEx(true)}>
-              ⬡ Examples
-            </button>
-            <button className="reset-btn" onClick={reset}>← New scan</button>
-          </div>
-        </div>
-      )}
+        {!hasResult && (
+          <>
+            <h1 className="hero-title">
+              Analyze any email<br />
+              <span className="hero-accent">for threats.</span>
+            </h1>
+            <p className="hero-sub">
+              Paste email text below. Suspicious words light up instantly.
+            </p>
+          </>
+        )}
+      </div>
 
       {/* ── EDITOR PANEL ── */}
       <div className={`input-panel ${hasResult ? "panel-analyzed" : ""}`}>
@@ -649,9 +628,106 @@ export default function Scanner({ onScanComplete }) {
 
       {error && <div className="error-banner">⚠ {error}</div>}
 
-      {/* 🌟 PROFESSOR UPDATE: THE FULL-WIDTH ADVERSARIAL EVASION GUIDE 🌟 */}
+      {/* ── VERDICT BANNER ── */}
+      {hasResult && (
+        <div className={`verdict-banner ${isPhish ? "verdict-phish" : "verdict-safe"}`}>
+          <div className="verdict-left" style={{ alignItems: 'center' }}>
+            <div className={`verdict-icon-circle ${isPhish ? "circle-phish" : "circle-safe"}`} style={{ width: '60px', height: '60px', fontSize: '32px' }}>
+              {isPhish ? "!" : "✓"}
+            </div>
+            <div>
+              <div className="verdict-label" style={{ fontSize: '28px', margin: 0 }}>
+                {isPhish ? "Phishing Mail" : "Legitimate Email"}
+              </div>
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: 8 }}>
+            <button className="reset-btn" onClick={reset}>← New scan</button>
+          </div>
+        </div>
+      )}
+
+      {/* 🌟 MORE INFORMATION ACCORDION 🌟 */}
+      {hasResult && (
+        <>
+          <button 
+            className={`more-info-toggle ${showMoreInfo ? 'open' : ''}`}
+            onClick={() => setShowMoreInfo(!showMoreInfo)}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '18px' }}>ℹ️</span> 
+              More Information
+            </div>
+            <span className="more-info-toggle-icon">▼</span>
+          </button>
+
+          {showMoreInfo && (
+            <div className="more-info-panel">
+              <div className="details-grid">
+                <div className="details-col">
+                  <div className="details-col-title">
+                    <span style={{fontSize: '16px'}}>🔴</span> Top 10 Phishing Words
+                  </div>
+                  {topPhish.length === 0 ? (
+                    <div className="tw-row" style={{ color: 'var(--text-dim)', borderLeft: 'none' }}>No phishing signals found.</div>
+                  ) : (
+                    <div className="tw-list">
+                      {topPhish.map((w, idx) => (
+                        <div key={w.word + idx} className="tw-row tw-row-phish">
+                          <span>"{w.word}"</span>
+                          <span>+{w.score.toFixed(4)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="details-col">
+                  <div className="details-col-title">
+                    <span style={{fontSize: '16px'}}>🟢</span> Top 10 Legitimate Words
+                  </div>
+                  {topSafe.length === 0 ? (
+                    <div className="tw-row" style={{ color: 'var(--text-dim)', borderLeft: 'none' }}>No legitimate signals found.</div>
+                  ) : (
+                    <div className="tw-list">
+                      {topSafe.map((w, idx) => (
+                        <div key={w.word + idx} className="tw-row tw-row-safe">
+                          <span>"{w.word}"</span>
+                          <span>{w.score.toFixed(4)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="methodology-box">
+                <div className="details-col-title" style={{ marginBottom: '20px' }}>
+                  <span style={{fontSize: '16px'}}>⚙️</span> How The Model Works
+                </div>
+                <div className="methodology-grid">
+                  <div className="methodology-step">
+                    <h4>1. TF-IDF Vectors</h4>
+                    <p>The email is passed through a Vectorizer to extract structural and frequency-based features, which are then scored by the primary classification model to output the base Phishing Probability.</p>
+                  </div>
+                  <div className="methodology-step">
+                    <h4>2. LIME Explainability</h4>
+                    <p>Local Interpretable Model-Agnostic Explanations (LIME) creates thousands of perturbed variations of your email to mathematically isolate the exact contribution of every single word toward the final prediction.</p>
+                  </div>
+                  <div className="methodology-step">
+                    <h4>3. Adversarial MLM</h4>
+                    <p>When high-risk words are found, a Masked Language Model predicts contextually appropriate benign synonyms. Swapping these words executes an evasion attack, bypassing the filter without altering human meaning.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* ── ADVERSARIAL EVASION GUIDE ── */}
       {hasResult && (isPhish || safeDisclaimer) && (
-        <div className="evade-panel" style={{ marginTop: '20px', position: 'static', padding: '24px' }}>
+        <div className="evade-panel" style={{ position: 'static', padding: '24px' }}>
 
           <div className="evade-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <div>
@@ -724,7 +800,6 @@ export default function Scanner({ onScanComplete }) {
                 )}
               </div>
 
-              {/* Grid layout for full-width cards */}
               <div className="evade-word-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
                 {evasions.map((entry) => {
                   const isSwapped = !!swapped[entry.original];
@@ -790,20 +865,6 @@ export default function Scanner({ onScanComplete }) {
                 })}
               </div>
 
-              {Object.keys(swapped).length > 0 && (
-                <button
-                  className="evade-reanalyze-btn"
-                  onClick={() => analyze()}
-                  disabled={loading}
-                  style={{ width: "100%", marginTop: '20px', padding: '14px', fontSize: '14px', justifyContent: 'center' }}
-                >
-                  {loading
-                    ? <span>Analyzing…</span>
-                    : <span>▶ Re-analyze to Confirm Lower % of Phishing</span>
-                  }
-                </button>
-              )}
-
               <button
                 className="evade-loadmore-btn"
                 onClick={loadMoreWords}
@@ -819,6 +880,26 @@ export default function Scanner({ onScanComplete }) {
           )}
         </div>
       )}
+
+      {/* 🌟 FLOATING ACTION BAR (Appears on any edit or swap) 🌟 */}
+      {hasResult && dirty && (
+        <div className="floating-action-bar">
+          <div className="fab-text">
+            <span>⚠️</span> Un-analyzed edits detected
+          </div>
+          <button 
+            className="fab-btn" 
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              analyze();
+            }} 
+            disabled={loading}
+          >
+            {loading ? "Analyzing..." : "↑ Re-Analyze Now"}
+          </button>
+        </div>
+      )}
+
     </div>
   );
 }

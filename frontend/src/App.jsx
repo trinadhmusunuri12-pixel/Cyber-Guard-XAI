@@ -5,9 +5,42 @@ import "./index.css";
 
 export default function App() {
   const [page, setPage] = useState("scanner");
-  const [historyRefresh, setHistoryRefresh] = useState(0);
+  
+  // Local Session State for History
+  const [history, setHistory] = useState([]);
+  const [loadedEmail, setLoadedEmail] = useState(null);
 
-  const triggerHistoryRefresh = () => setHistoryRefresh(n => n + 1);
+  // 🌟 UPDATED: Now receives a specific scanId to update existing sessions
+  const handleScanComplete = (data, text, scanId) => {
+    setHistory(prev => {
+      // Remove the previous version of this exact scan session
+      const filteredHistory = prev.filter(item => item.id !== scanId);
+      
+      const newItem = {
+        id: scanId,
+        prediction: data.prediction,
+        risk_score: data.risk_score,
+        email_preview: text.substring(0, 120) + "...",
+        text: text,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Push the newly updated scan to the very top of the history
+      return [newItem, ...filteredHistory];
+    });
+  };
+
+  // Triggered by History when user clicks "Load & Edit"
+  const loadFromHistory = (item) => {
+    setLoadedEmail(item);
+    setPage("scanner");
+  };
+
+  const deleteHistoryItem = (id) => {
+    setHistory(prev => prev.filter(item => item.id !== id));
+  };
+
+  const clearHistory = () => setHistory([]);
 
   return (
     <div className="app">
@@ -35,8 +68,21 @@ export default function App() {
       </header>
 
       <main className="main">
-        {page === "scanner" && <Scanner onScanComplete={triggerHistoryRefresh} />}
-        {page === "history" && <History refresh={historyRefresh} />}
+        {page === "scanner" && (
+          <Scanner 
+            onScanComplete={handleScanComplete} 
+            loadedEmail={loadedEmail}
+            clearLoadedEmail={() => setLoadedEmail(null)}
+          />
+        )}
+        {page === "history" && (
+          <History 
+            history={history}
+            onClear={clearHistory}
+            onDelete={deleteHistoryItem}
+            onLoad={loadFromHistory}
+          />
+        )}
       </main>
 
       <footer className="footer">
