@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { PHISHING_KEYWORDS, PHISHING_KEYWORDS_MAP } from "./keywords.js";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API = "https://cyber-guard-xai.onrender.com";
 
 // ── 24 Expanded Example Emails (12 Phishing, 12 Legitimate) ─────────────────
 const EXAMPLES = {
